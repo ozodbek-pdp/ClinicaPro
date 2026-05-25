@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# If you have a backend, uncomment and set the `to` URL to proxy /api/* to it.
+# For a static-only deploy (no backend), leave this commented so the client-side
+# mock API will intercept `/api/*` requests using `db_fallback.json`.
+# [[redirects]]
+#   from = "/api/*"
+#   to = "https://your-backend.example.com/:splat"
+#   status = 200
+#   force = true

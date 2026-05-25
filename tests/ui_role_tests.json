@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-05-23T15:08:45.000Z",
+  "results": {
+    "admin": {
+      "roleText": "Bosh Administrator",
+      "navDoctors": true,
+      "navRooms": true,
+      "addButtonVisible": true,
+      "created": true,
+      "createdRoomNumber": "ADMIN-UI-49390",
+      "deleted": true,
+      "errors": []
+    },
+    "doctor": {
+      "roleText": "Shifokor-Mutaxassis",
+      "navDoctors": true,
+      "navRooms": true,
+      "addButtonVisible": true,
+      "created": true,
+      "createdRoomNumber": "DOCTOR-UI-04276",
+      "deleted": true,
+      "errors": []
+    },
+    "reception": {
+      "roleText": "Registratura",
+      "navDoctors": true,
+      "navRooms": true,
+      "addButtonVisible": true,
+      "created": true,
+      "createdRoomNumber": "RECEPTION-UI-87630",
+      "deleted": true,
+      "errors": []
+    }
+  }
+}

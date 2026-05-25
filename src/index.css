@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Increase readability. Darken all light/medium grey colors for high contrast and pixel-perfect clarity */
+  --color-slate-400: #4a5d73;  /* Much darker slate (previously very light grey) for high visibility of metadata/labels */
+  --color-slate-500: #33445c;  /* Rich dark slate for secondary text paragraph elements */
+  --color-slate-650: #1e2d42;  /* Comfortable reading contrast */
+  --color-slate-800: #0f172a;  /* High contrast primary text */
+}
+
+@layer base {
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
+}
+
+/* Strict animated visibility helpers used for role-based UI hiding/showing */
+.strict-hide {
+  opacity: 0 !important;
+  transform: translateY(6px) scale(0.985) !important;
+  pointer-events: none !important;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+.strict-show {
+  opacity: 1 !important;
+  transform: none !important;
+  pointer-events: auto !important;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+/* Accessibility: visually hidden but still available to screen readers when needed */
+.sr-only-preserve {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+:root {
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --accent-color: #0d9488; /* Medical Teal */
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+html.dark {
+  --bg-main: #090d16;
+  --bg-card: #0f1524;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #1e293b;
+  --accent-color: #14b8a6; /* Medical Dark Teal */
+}
+
+body {
+  @apply bg-slate-50 dark:bg-[#090d16] text-slate-800 dark:text-slate-100 antialiased font-sans transition-colors duration-300 selection:bg-teal-500/15;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 dark:bg-slate-800 rounded-full hover:bg-slate-300 dark:hover:bg-slate-700;
+}
+
+.btn-primary {
+  @apply px-5 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-bold text-sm tracking-wide transition-all active:scale-95 shadow-lg shadow-teal-600/10 dark:shadow-teal-900/5 hover:shadow-teal-600/20 flex items-center justify-center gap-2.5 disabled:opacity-50 disabled:pointer-events-none cursor-pointer;
+}
+
+.btn-secondary {
+  @apply px-5 py-3 bg-white dark:bg-slate-900 hover:bg-emerald-50/20 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-sm tracking-wide transition-all active:scale-95 border border-slate-200/85 dark:border-slate-800 cursor-pointer;
+}
+
+.btn-ghost {
+  @apply p-2.5 text-slate-500 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-teal-50/50 dark:hover:bg-teal-950/10 rounded-xl transition-all cursor-pointer;
+}
+
+.card-premium {
+  @apply bg-white dark:bg-[#0f1524] border border-teal-500/15 rounded-3xl shadow-[0_4px_24px_rgba(13,148,136,0.03)] transition-all duration-300 hover:border-teal-500/25 hover:shadow-[0_8px_30px_rgba(13,148,136,0.06)];
+}
+
+.input-premium {
+  @apply w-full px-4 py-3 bg-white dark:bg-slate-900/40 border border-slate-300/80 focus:border-teal-500 focus:ring-4 focus:ring-teal-500/5 rounded-xl text-sm font-semibold text-slate-800 placeholder:text-slate-400 outline-none transition-all shadow-[0_2px_8px_rgba(13,148,136,0.01)];
+}
+
+/* Fix for overlapping search icons: force padding-left when an icon is present */
+.input-icon-left {
+  padding-left: 2.75rem !important;
+}
+

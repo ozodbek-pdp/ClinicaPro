@@ -1,0 +1,99 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { return isSignedIn() && (request.auth.token.email == 'ozodbekahmedov12007@gmail.com' || request.auth.token.email == 'admin@admin.com' || request.auth.token.email == 'superadmin@admin.com' || (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin')); }
+    function isDoctor() { return isSignedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'doctor'; }
+    function isReception() { return isSignedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'reception'; }
+    function isOwner(userId) { return request.auth.uid == userId; }
+    function isValidId(id) { return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    function isValidUser(data) {
+      return data.keys().hasAll(['role', 'firstName', 'lastName', 'createdAt', 'updatedAt']) &&
+             data.role is string && data.role in ['admin', 'doctor', 'reception', 'patient'] &&
+             data.firstName is string && data.firstName.size() <= 100 &&
+             data.lastName is string && data.lastName.size() <= 100 &&
+             data.createdAt is string && data.createdAt.size() >= 10 &&
+             data.updatedAt is string && data.updatedAt.size() >= 10 &&
+             (data.get('email', '') is string && data.get('email', '').size() <= 150) &&
+             (data.get('phone', '') is string && data.get('phone', '').size() <= 50) &&
+             (data.get('patronymic', '') is string && data.get('patronymic', '').size() <= 100) &&
+             (data.get('birthYear', '') is string && data.get('birthYear', '').size() <= 10) &&
+             (data.get('address', '') is string && data.get('address', '').size() <= 500) &&
+             (data.get('bio', '') is string && data.get('bio', '').size() <= 2000) &&
+             (data.get('specialty', '') is string && data.get('specialty', '').size() <= 200) &&
+             (data.get('education', '') is string && data.get('education', '').size() <= 500) &&
+             (data.get('assignedDoctorId', '') is string && data.get('assignedDoctorId', '').size() <= 128);
+    }
+
+    function isValidUserUpdate(data) {
+      return data.role is string && data.role in ['admin', 'doctor', 'reception', 'patient'] &&
+             data.firstName is string && data.firstName.size() <= 100 &&
+             data.lastName is string && data.lastName.size() <= 100 &&
+             data.updatedAt is string && data.updatedAt.size() >= 10 &&
+             (data.get('email', '') is string && data.get('email', '').size() <= 150) &&
+             (data.get('phone', '') is string && data.get('phone', '').size() <= 50) &&
+             (data.get('patronymic', '') is string && data.get('patronymic', '').size() <= 100) &&
+             (data.get('birthYear', '') is string && data.get('birthYear', '').size() <= 10) &&
+             (data.get('address', '') is string && data.get('address', '').size() <= 500) &&
+             (data.get('bio', '') is string && data.get('bio', '').size() <= 2000) &&
+             (data.get('specialty', '') is string && data.get('specialty', '').size() <= 200) &&
+             (data.get('education', '') is string && data.get('education', '').size() <= 500) &&
+             (data.get('assignedDoctorId', '') is string && data.get('assignedDoctorId', '').size() <= 128);
+    }
+
+    match /users/{userId} {
+      allow get: if isSignedIn() && isValidId(userId) && (isAdmin() || isReception() || isOwner(userId) || (isDoctor() && existing().assignedDoctorId == request.auth.uid) || (isDoctor() && existing().role == 'doctor'));
+      allow list: if isSignedIn() && (isAdmin() || isReception() || (isDoctor() && (resource.data.assignedDoctorId == request.auth.uid || resource.data.role == 'doctor' || resource.data.role == 'patient')));
+      allow create: if isSignedIn() && isValidId(userId) && isValidUser(incoming()) && (isAdmin() || isReception() || isOwner(userId) || (isDoctor() && incoming().role == 'patient' && incoming().assignedDoctorId == request.auth.uid)) && (incoming().role != 'admin' || isAdmin());
+      allow update: if isSignedIn() && isValidId(userId) && isValidUserUpdate(incoming()) && incoming().createdAt == existing().createdAt && (
+        isAdmin() ||
+        (isReception() && existing().role != 'admin' && incoming().role != 'admin') ||
+        (isOwner(userId) && incoming().role == existing().role) ||
+        (isDoctor() && existing().role == 'patient' && incoming().role == 'patient' && (existing().assignedDoctorId == request.auth.uid || incoming().assignedDoctorId == request.auth.uid))
+      );
+      allow delete: if isSignedIn() && isValidId(userId) && isAdmin();
+    }
+
+    function isValidDiagnosis(data) {
+      return data.keys().hasAll(['patientId', 'doctorId', 'description', 'status', 'createdAt', 'updatedAt']) &&
+             data.patientId is string && data.patientId.size() > 0 && data.patientId.size() <= 128 &&
+             data.doctorId is string && data.doctorId.size() > 0 && data.doctorId.size() <= 128 &&
+             data.description is string && data.description.size() <= 5000 &&
+             data.status is string && data.status in ['active', 'completed'] &&
+             data.createdAt is string && data.createdAt.size() >= 10 &&
+             data.updatedAt is string && data.updatedAt.size() >= 10 &&
+             (data.get('icdCode', '') is string && data.get('icdCode', '').size() <= 50) &&
+             (data.get('severity', '') is string && data.get('severity', '').size() <= 100) &&
+             (data.get('treatmentStartDate', '') is string && data.get('treatmentStartDate', '').size() <= 50);
+    }
+    
+    function isValidDiagnosisUpdate(data) {
+      return data.patientId is string && data.patientId.size() > 0 && data.patientId.size() <= 128 &&
+             data.doctorId is string && data.doctorId.size() > 0 && data.doctorId.size() <= 128 &&
+             data.description is string && data.description.size() <= 5000 &&
+             data.status is string && data.status in ['active', 'completed'] &&
+             data.updatedAt is string && data.updatedAt.size() >= 10 &&
+             (data.get('icdCode', '') is string && data.get('icdCode', '').size() <= 50) &&
+             (data.get('severity', '') is string && data.get('severity', '').size() <= 100) &&
+             (data.get('treatmentStartDate', '') is string && data.get('treatmentStartDate', '').size() <= 50);
+    }
+
+    match /diagnoses/{diagnosisId} {
+      allow get: if isSignedIn() && isValidId(diagnosisId) && (isAdmin() || isReception() || request.auth.uid == existing().patientId || request.auth.uid == existing().doctorId);
+      allow list: if isSignedIn() && (isAdmin() || isReception() || resource.data.patientId == request.auth.uid || resource.data.doctorId == request.auth.uid);
+      allow create: if isSignedIn() && isValidId(diagnosisId) && isValidDiagnosis(incoming()) &&
+        (isAdmin() || isReception() || (isDoctor() && incoming().doctorId == request.auth.uid)) &&
+        exists(/databases/$(database)/documents/users/$(incoming().patientId));
+      allow update: if isSignedIn() && isValidId(diagnosisId) && isValidDiagnosisUpdate(incoming()) && incoming().createdAt == existing().createdAt && incoming().patientId == existing().patientId &&
+        (isAdmin() || isReception() || (isDoctor() && existing().doctorId == request.auth.uid && incoming().doctorId == request.auth.uid));
+      allow delete: if isSignedIn() && isValidId(diagnosisId) && isAdmin();
+    }
+  }
+}

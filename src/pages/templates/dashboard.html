@@ -1,0 +1,295 @@
+<div class="flex flex-col gap-8 flex-1 opacity-0 translate-y-4 animate-[fadeInUp_0.5s_ease-out_forwards] pb-10">
+  <!-- Live Medical Heartbeat Monitor Banner -->
+  <div class="bg-[#090d16] dark:bg-[#060a10] border border-rose-500/25 px-6 py-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden shadow-xl shadow-rose-950/15">
+    <style>
+      @keyframes heartBeat {
+        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 1px rgba(244,63,94,0.4)); }
+        14% { transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(244,63,94,0.95)); }
+        28% { transform: scale(1); filter: drop-shadow(0 0 1px rgba(244,63,94,0.4)); }
+        42% { transform: scale(1.1); filter: drop-shadow(0 0 6px rgba(244,63,94,0.75)); }
+      }
+      @keyframes ecgLoop {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .animate-heartbeat {
+        animation: heartBeat 1.4s infinite ease-in-out;
+      }
+      .ecg-loop-container {
+        display: flex;
+        width: 1000px;
+        animation: ecgLoop 8s linear infinite;
+      }
+    </style>
+    
+    <!-- Left badge & Icon -->
+    <div class="flex items-center gap-4 shrink-0">
+      <!-- Heart Logo -->
+      <div class="w-11 h-11 rounded-xl bg-rose-500/10 dark:bg-rose-500/20 border border-rose-500/25 flex items-center justify-center shrink-0 shadow-lg shadow-rose-500/10">
+        <svg class="h-6 w-6 text-rose-500 animate-heartbeat fill-rose-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+        </svg>
+      </div>
+      <div class="flex flex-col">
+        <span class="uppercase tracking-widest font-black text-[10px] text-rose-500 font-mono">DATCHIK FAOL</span>
+        <span class="text-xs font-black text-rose-100 tracking-wide">KARDIO MONITORI</span>
+      </div>
+    </div>
+    
+    <!-- Wide Glowing Red Loop Heartbeat Monitor -->
+    <div class="flex-1 overflow-hidden relative h-12 flex items-center bg-black/40 rounded-xl px-2 border border-rose-500/10">
+      <!-- Grid line background for tactical clinical look -->
+      <div class="absolute inset-0 opacity-15 pointer-events-none bg-[linear-gradient(to_right,#ef4444_1px,transparent_1px),linear-gradient(to_bottom,#ef4444_1px,transparent_1px)] bg-[size:16px_16px]"></div>
+      
+      <div class="ecg-loop-container">
+        <!-- Part 1 -->
+        <svg class="h-8 text-rose-50 w-[500px] shrink-0" viewBox="0 0 500 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 0 20 L 80 20 L 90 20 L 95 14 L 100 24 L 105 20 L 130 20 L 135 15 L 142 35 L 148 5 L 154 22 L 160 20 L 175 20 L 185 10 L 195 20 L 250 20 L 330 20 L 340 20 L 345 14 L 350 24 L 355 20 L 380 20 L 385 15 L 392 35 L 398 5 L 404 22 L 410 20 L 425 20 L 435 10 L 445 20 L 500 20" 
+                stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="drop-shadow-[0_0_4px_#ef4444]" />
+        </svg>
+        <!-- Part 2 (Seamless loop copy) -->
+        <svg class="h-8 text-rose-50 w-[500px] shrink-0" viewBox="0 0 500 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 0 20 L 80 20 L 90 20 L 95 14 L 100 24 L 105 20 L 130 20 L 135 15 L 142 35 L 148 5 L 154 22 L 160 20 L 175 20 L 185 10 L 195 20 L 250 20 L 330 20 L 340 20 L 345 14 L 350 24 L 355 20 L 380 20 L 385 15 L 392 35 L 398 5 L 404 22 L 410 20 L 425 20 L 435 10 L 445 20 L 500 20" 
+                stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="drop-shadow-[0_0_4px_#ef4444]" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Live Date and Pulse status -->
+    <div class="flex flex-col items-end shrink-0 hidden md:flex font-mono text-right">
+      <span id="dashboard-date" class="text-[11px] font-black text-rose-300">ONLINE</span>
+      <span class="text-[9px] font-bold text-slate-400">PULSE: 76 BPM</span>
+    </div>
+  </div>
+
+  <!-- Top Title Bar -->
+  <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 pb-2 border-b border-slate-100 dark:border-slate-800/80">
+    <div class="flex items-center gap-4">
+       <div class="w-1.5 h-10 bg-teal-600 rounded-full shadow-lg shadow-teal-600/50"></div>
+       <div>
+         <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-none">Asosiy Konsol</h1>
+         <p id="dashboard-role-label" class="text-slate-500 dark:text-slate-400 font-bold text-xs mt-1.5 uppercase tracking-wider font-mono">
+           Paneli <span class="text-slate-300 dark:text-slate-700 mx-1.5">•</span> Clinica Pro tizimi
+         </p>
+       </div>
+    </div>
+    <div id="download-spravka-container"></div>
+  </header>
+
+  <!-- Dynamic Welcome Card -->
+  <div class="card-premium p-8 bg-gradient-to-br from-white via-slate-50/50 to-teal-50/[0.1] dark:from-[#0f1524] dark:to-[#0f1c24] relative overflow-hidden group">
+    <div class="absolute right-0 top-0 w-80 h-80 bg-gradient-to-br from-teal-500/5 to-emerald-500/5 rounded-full blur-3xl pointer-events-none transition-all group-hover:scale-110 duration-500"></div>
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
+      <div class="space-y-3">
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-black uppercase text-teal-650 dark:text-teal-400 tracking-widest bg-teal-50 dark:bg-teal-950/40 px-3 py-1 rounded-lg border border-teal-100/30 dark:border-teal-900/10">Salomatlik markazi</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Markazlashgan xizmat</span>
+        </div>
+        <h2 class="text-2xl md:text-3.5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+          Xush kelibsiz, <span id="user-name" class="text-teal-600 dark:text-teal-400"></span>!
+        </h2>
+        <p class="text-slate-500 dark:text-slate-400 text-sm max-w-xl font-medium leading-relaxed">
+          Platformamiz orqali bemorlarni ro'yxatga olish, tibbiy ko'riklarni tashkil qilish, elektron tashxis varaqalarini tayyorlash va kadrlar boshqaruvini mukammal monitoring qiling.
+        </p>
+      </div>
+      
+      <!-- Real-time dynamic clock -->
+      <div class="bg-white dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200/50 dark:border-slate-800/80 shadow-xs flex items-center gap-3 shrink-0">
+        <div class="w-10 h-10 bg-teal-50 dark:bg-teal-950/20 text-teal-600 rounded-xl flex items-center justify-center shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <p class="text-[10px] font-black text-slate-400 uppercase tracking-wider font-mono">Bugungi sana</p>
+          <p class="text-sm font-extrabold text-slate-800 dark:text-white" id="live-calendar-date">
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Grid Block -->
+  <div id="stats-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Patients Card -->
+    <div id="stats-patients-card" class="card-premium p-6.5 flex flex-col justify-between group overflow-hidden relative min-h-[160px] hover:-translate-y-1 hover:border-teal-500/30 hidden">
+      <div class="absolute -right-6 -bottom-6 w-28 h-28 bg-teal-500/5 dark:bg-teal-450/5 rotate-12 rounded-3xl transition-transform group-hover:scale-125 duration-500"></div>
+      <div class="flex items-start justify-between mb-4 relative z-10">
+        <div class="w-12 h-12 bg-teal-50 dark:bg-teal-950/40 text-teal-600 dark:text-teal-400 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-105 duration-305 border border-teal-100/55 dark:border-teal-900/10">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M18 7a4 4 0 0 0-3-3.87"/></svg>
+        </div>
+        <span class="text-[10px] text-emerald-600 font-extrabold bg-emerald-50 dark:bg-emerald-500/10 px-3 py-1.5 rounded-lg uppercase tracking-wider border border-emerald-100/30 dark:border-emerald-500/10">Nazoratda</span>
+      </div>
+      <div class="relative z-10">
+        <span id="stats-patients-label" class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest block font-mono">Bemorlar Kartotekasi</span>
+        <div class="text-4.5xl font-black text-slate-800 dark:text-slate-100 mt-1 tracking-tight"><span id="stats-patients-count">0</span> <span class="text-sm font-bold text-slate-450 dark:text-slate-500">nafar</span></div>
+      </div>
+    </div>
+
+    <!-- Doctors Card -->
+    <div id="stats-doctors-card" class="card-premium p-6.5 flex flex-col justify-between group overflow-hidden relative min-h-[160px] hover:-translate-y-1 hover:border-teal-500/30 hidden">
+       <div class="absolute -right-6 -bottom-6 w-28 h-28 bg-emerald-500/5 dark:bg-emerald-450/5 -rotate-12 rounded-3xl transition-transform group-hover:scale-125 duration-550"></div>
+      <div class="flex items-start justify-between mb-4 relative z-10">
+        <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-105 duration-300 border border-emerald-100/50 dark:border-emerald-900/10">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14.5v-9l-7-3-7 3v9c0 5.5 7 8.5 7 8.5s7-3 7-8.5Z"/><path d="M12 9v6"/><path d="M9 12h6"/></svg>
+        </div>
+        <span class="text-[10px] text-teal-650 dark:text-teal-400 font-extrabold bg-teal-50 dark:bg-teal-500/10 px-3 py-1.5 rounded-lg uppercase tracking-wider border border-teal-100/30 dark:border-teal-500/10">Shifokorlar</span>
+      </div>
+      <div class="relative z-10">
+        <span id="stats-doctors-label" class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest block font-mono">Klinika Mutaxassislari</span>
+        <div class="text-4.5xl font-black text-slate-800 dark:text-slate-100 mt-1 tracking-tight"><span id="stats-doctors-count">0</span> <span class="text-sm font-bold text-slate-450 dark:text-slate-500">shifokor</span></div>
+      </div>
+    </div>
+
+    <!-- Diagnoses Card -->
+    <div id="stats-diagnoses-card" class="card-premium p-6.5 flex flex-col justify-between group overflow-hidden relative min-h-[160px] hover:-translate-y-1 bg-gradient-to-br from-teal-600 to-teal-750 dark:from-teal-950 dark:to-teal-800 border-none shadow-xl shadow-teal-650/15">
+      <div class="absolute -right-6 -bottom-6 w-28 h-28 bg-white/5 rotate-45 rounded-3xl group-hover:scale-125 transition-transform duration-500"></div>
+      <div class="flex items-start justify-between mb-4 relative z-10">
+        <div class="w-12 h-12 bg-white/15 text-white rounded-2xl flex items-center justify-center transition-transform group-hover:scale-105 duration-305 shadow-inner border border-white/10">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <span class="text-[10px] text-white/90 font-extrabold bg-white/15 px-3 py-1.5 rounded-lg uppercase tracking-wider border border-white/10">Xulosalar</span>
+      </div>
+      <div class="relative z-10">
+        <span id="stats-diagnoses-label" class="text-[10px] font-bold text-white/70 uppercase tracking-widest block font-mono">Rasmiy Tashxis Qaydlari</span>
+        <div class="text-4.5xl font-black text-white mt-1 tracking-tight"><span id="stats-diagnoses-count">0</span> <span class="text-sm font-bold text-white/80">ta xulosa</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Dashboard Content Grid -->
+  <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+    <div id="left-content" class="lg:col-span-2 flex flex-col gap-6">
+      
+      <!-- Doctor Info Card for Patient Role -->
+      <div id="doctor-info-card" class="card-premium p-8 animate-[zoomIn_0.5s_ease-out] relative overflow-hidden hidden">
+         <div class="absolute right-0 top-0 w-64 h-64 bg-teal-500/5 rounded-full blur-3xl pointer-events-none"></div>
+         <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+            <div class="relative shrink-0">
+               <div id="doc-avatar-text" class="w-24 h-24 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 text-white flex items-center justify-center font-black text-3xl shadow-xl shadow-teal-600/15 border border-white/10">
+                  D
+               </div>
+               <div class="absolute -bottom-1.5 -right-1.5 w-8 h-8 bg-emerald-500 border-4 border-white dark:border-[#0f1524] rounded-full flex items-center justify-center text-white shadow-lg animate-pulse">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+               </div>
+            </div>
+            <div class="flex-1 text-center md:text-left space-y-3">
+               <span class="inline-flex px-3 py-1 bg-teal-50 dark:bg-teal-950/50 text-teal-600 dark:text-teal-400 rounded-lg text-[10px] font-extrabold uppercase tracking-wider border border-teal-100/50 dark:border-teal-900/10">Mening Masul Shifokorim</span>
+               <h3 id="doc-fullname-text" class="text-3xl font-extrabold text-slate-800 dark:text-white tracking-tight leading-none">Dr. Shifokor</h3>
+               <p id="doc-specialty-text" class="text-teal-600 dark:text-teal-400 font-extrabold uppercase text-xs tracking-widest">Terapevt Mutaxassis</p>
+               <div class="flex flex-wrap justify-center md:justify-start gap-4 mt-6">
+                  <div class="flex items-center gap-2.5 px-4.5 py-2.5 bg-slate-100/70 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-400 transition-colors hover:border-slate-350">
+                     <svg xmlns="http://www.w3.org/2500/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-teal-550 shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                     <span id="doc-phone-text">Telefon raqam mavjud emas</span>
+                  </div>
+                  <div class="flex items-center gap-2.5 px-4.5 py-2.5 bg-slate-100/70 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-400 transition-colors hover:border-slate-350">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-teal-550 shrink-0"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                     <span id="doc-email-text">Email kiritilmagan</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div id="doc-bio-section" class="mt-8 p-6 bg-slate-50/50 dark:bg-slate-900/30 rounded-2xl border border-slate-200/60 dark:border-slate-800/80 text-slate-600 dark:text-slate-400 italic font-semibold leading-relaxed relative text-sm hidden">
+            <div class="absolute -top-3 left-6 px-3.5 py-1 bg-white dark:bg-[#0f1524] text-[9px] font-black uppercase tracking-widest border border-slate-200/65 dark:border-slate-800 rounded-full text-teal-605">Shifokor tarjimai holi va ma'lumoti</div>
+            "<span id="doc-bio-text"></span>"
+         </div>
+      </div>
+
+      <!-- Diagnoses Table Container card -->
+      <div id="diagnoses-table-card" class="card-premium p-7 space-y-6 flex flex-col justify-between flex-1">
+        <div class="space-y-1.5 flex justify-between items-center">
+          <div>
+            <h3 id="diagnoses-table-title" class="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-teal-600"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span>So'nggi Tibbiy Tashxislar Tarixi</span>
+            </h3>
+            <p class="text-slate-400 dark:text-slate-550 text-xs font-semibold uppercase tracking-wider font-mono">Ma'lumotlar omboridan olingan ko'riklar</p>
+          </div>
+          <span class="text-xs font-black text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-950/40 border border-teal-100/30 px-3 py-1 rounded-xl font-mono uppercase">Tizim Faol</span>
+        </div>
+        <div class="divide-y divide-slate-100 dark:divide-slate-800/60 overflow-hidden flex-1 flex flex-col justify-center min-h-[220px]">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead>
+                <tr class="border-b border-slate-200/40 pb-3 text-[10px] uppercase font-mono tracking-wider text-slate-450">
+                    <th class="py-3 font-bold text-slate-400">Sana</th>
+                    <th class="py-3 font-bold text-slate-400">F.I.Sh</th>
+                    <th class="py-3 font-bold text-slate-400">Qo'yilgan tashxis / Izoh</th>
+                    <th class="py-3 font-bold text-slate-400 text-right">Amal statusi</th>
+                </tr>
+              </thead>
+              <tbody id="dashboard-recent-diagnoses-rows" class="divide-y divide-slate-100 dark:divide-slate-800/40">
+                <!-- Will be rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Actions -->
+      <div id="footer-actions-card" class="pt-4 border-t border-slate-100 dark:border-slate-800/50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+        <span class="text-[10px] font-black uppercase tracking-wider text-slate-405 dark:text-slate-500 font-mono">Eslatma: Ma'lumotnomalar real vaqt rejimida integratsiya bo'ladi</span>
+        <button id="footer-nav-btn" class="text-xs font-black text-teal-600 hover:text-teal-700 dark:text-teal-400 flex items-center gap-1 uppercase tracking-widest cursor-pointer">
+          <span id="footer-nav-label">Amallar</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Right Content Panel -->
+    <div id="right-content" class="flex flex-col gap-6">
+      <!-- SSL & Secure data policy widget -->
+      <div class="card-premium p-6 bg-gradient-to-br from-teal-600 to-teal-800 text-white border-none shadow-xl shadow-teal-600/10 flex flex-col justify-between min-h-[200px] relative overflow-hidden group">
+          <div class="absolute -right-10 -top-10 opacity-10 pointer-events-none rotate-12 text-white">
+              <svg xmlns="http://www.w3.org/2050/svg" width="220" height="220" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          
+          <div class="space-y-4 relative z-10">
+              <div class="w-10 h-10 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/20 shadow-inner group-hover:scale-110 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </div>
+              <div class="space-y-1">
+              <h4 class="font-extrabold uppercase tracking-wider text-xs font-mono">SSL Xavfsizlik Kafolati</h4>
+              <h3 class="text-lg font-extrabold tracking-tight">Shaxsiy Tibbiy Ma'lumot Axboroti</h3>
+              </div>
+              <p class="text-white/80 text-xs leading-relaxed">Bemorlar shaxsiy ambolatoriya va tashxis varaqa ma'lumotlari SSL shifrlash protokollari asosida to'liq himoyalangan.</p>
+          </div>
+          
+          <button id="show-security-btn" class="mt-6 w-full py-2.5 bg-white text-teal-700 hover:bg-teal-50 rounded-xl font-bold text-xs uppercase tracking-widest transition-all cursor-pointer relative z-10 block text-center">
+              TIZIM PROTOKOLI
+          </button>
+      </div>
+
+      <!-- Health tip widget -->
+      <div class="card-premium p-6 space-y-4 hover:border-teal-500/20">
+          <div class="flex items-center gap-3">
+              <div class="w-9 h-9 bg-teal-50 dark:bg-teal-950/40 text-teal-600 rounded-xl flex items-center justify-center shrink-0 border border-teal-100/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="animate-pulse"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <div>
+              <h4 class="font-extrabold text-sm text-slate-800 dark:text-white tracking-tight">Klinika Maslahatlari</h4>
+              <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest font-mono">Bugungi sog'lom kun tavsiyasi</p>
+              </div>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold italic leading-relaxed">
+              "Kunda kamida 2-2.5 litr iliq toza suv ichish kardiogramma mufidligini sezilarli darajada yaxshilaydi va butunjahon salomatlik standartlariga to'g'ri keladi."
+          </p>
+          <div class="text-[10px] text-teal-650 dark:text-teal-400 font-extrabold uppercase tracking-wide">
+              — Dr. ProKlinika terapevti
+          </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Security dialog overlay structure -->
+<div id="security-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md hidden animate-[fadeIn_0.3s_ease-out]">
+   <div class="bg-white dark:bg-[#0f1524] max-w-md w-full p-8 rounded-3xl border border-slate-205 dark:border-slate-800 shadow-2xl relative animate-[zoomIn_0.3s_ease-out]">
+      <div class="w-12 h-12 rounded-2xl bg-teal-50 dark:bg-teal-950/50 text-teal-600 dark:text-teal-400 flex items-center justify-center mb-6 border border-teal-100/20">
+         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 14.5v-9l-7-3-7 3v9c0 5.5 7 8.5 7 8.5s7-3 7-8.5Z"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+      </div>
+      <h3 class="text-xl font-extrabold text-slate-800 dark:text-white mb-2">Platforma Xavfsizlik Kafolati</h3>
+      <p class="text-slate-500 dark:text-slate-400 text-sm font-medium leading-relaxed mb-6">Clinica Pro portalining barcha tibbiy hujjatlari, hisobotlari va shaxsiy ma'lumotlari milliy standartlarga va integratsiyalangan AES-256 xavfsizlik protokollariga kiritilgan. Ma'lumotlar ruxsatsiz uchinchi shaxslarga berilmaydi hamda qat'iy ravishda unifikatsiya qilinadi.</p>
+      <button id="close-security-btn" class="btn-primary w-full !py-3.5 cursor-pointer">Tushunarli</button>
+   </div>
+</div>

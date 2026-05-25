@@ -1,0 +1,13 @@
+{
+  "name": "Klinika Pro",
+  "description": "MediCore Solutions tomonidan klinika xodimlari va bemorlar uchun maxsus raqamli tibbiy yozuvlarni boshqarish tizimi.",
+  "requestFramePermissions": [],
+  "contact": {
+    "address": "Toshkent shahri, Mustaqillik ko'chasi 15",
+    "phone": "+998 71 200 00 00",
+    "email": "info@klinika.uz"
+  },
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

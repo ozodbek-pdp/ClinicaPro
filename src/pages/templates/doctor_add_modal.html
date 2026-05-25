@@ -1,0 +1,119 @@
+<div class="fixed inset-0 bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-[fadeIn_0.3s_ease-out]">
+  <div class="bg-white dark:bg-[#121826] rounded-3xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col scale-100 animate-[zoomIn_0.3s_ease-out] border border-slate-200/60 dark:border-slate-800">
+    <div class="px-8 py-6 border-b border-slate-200/50 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-900/40 shrink-0">
+      <div>
+        <h2 class="text-2xl font-extrabold text-[#111827] dark:text-white tracking-tight">Yangi Xodim Ro'yxatga Olish</h2>
+        <p class="text-[10px] font-black text-teal-600 dark:text-teal-400 mt-1 uppercase tracking-wider font-mono">Shifokor yoki qabulxona xizmatchisini qo'shish</p>
+      </div>
+      <button id="close-modal" class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-slate-650 dark:hover:text-slate-200 hover:bg-slate-101 dark:hover:bg-slate-800 rounded-xl transition-all text-xl cursor-pointer">&times;</button>
+    </div>
+    <div class="overflow-y-auto flex-1 custom-scrollbar">
+      <form id="doc-form" class="p-8 flex flex-col gap-5.5" autocomplete="off">
+        <!-- Prevent autofill of search fields -->
+        <input type="text" name="prevent_autofill_username" style="display:none;" />
+        <input type="password" name="prevent_autofill_password" style="display:none;" />
+        
+        <!-- Dynamic Error Panel -->
+        <div id="form-error-container" class="bg-rose-50 dark:bg-rose-955/20 text-rose-600 dark:text-rose-400 p-4 rounded-xl text-xs font-bold border border-rose-100/50 dark:border-rose-900/20 flex items-center gap-2 hidden transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          <span id="form-error-text"></span>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4.5">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Ism</label>
+            <input type="text" name="firstName" required placeholder="Masalan, Alisher" class="input-premium">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Familiya</label>
+            <input type="text" name="lastName" required placeholder="Masalan, Ubaydullayev" class="input-premium">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4.5">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Telefon raqam</label>
+            <input type="text" name="phone" required class="input-premium" placeholder="+998 93 456 78 90">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Tug'ilgan sana</label>
+            <input type="date" name="birth_date" class="input-premium">
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Turar joy manzili</label>
+          <input type="text" name="address" class="input-premium" placeholder="Shahar, tuman, mahalla, uy...">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4.5">
+           <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Rol (Lavozimi)</label>
+            <select name="role" id="role-select" class="input-premium cursor-pointer">
+              <option value="doctor">Shifokor (Doctor)</option>
+              <option value="reception">Qabulxona (Receptionist)</option>
+            </select>
+          </div>
+           <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5 font-sans">Mutaxassisligi (Faqat shifokor uchun)</label>
+            <input type="text" name="specialty" id="spec-input" placeholder="Masalan, Kardiolog, Terapevt, Tish shifokori" class="input-premium disabled:opacity-[0.35] disabled:cursor-not-allowed">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4.5 bg-slate-55/40 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-100 dark:border-slate-800/80" id="room-selection-container">
+           <div class="space-y-1.5 sm:col-span-2">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-305 ml-0.5">Xona biriktirish</label>
+            <div class="flex items-center gap-3">
+              <select name="room_number" id="room-select-field" class="input-premium flex-1 cursor-pointer">
+                <option value="">-- Klinikadagi Bo'sh Xonalar --</option>
+              </select>
+              <button id="auto-suggest-room" type="button" class="px-3.5 py-3.5 bg-teal-50 hover:bg-teal-100 text-teal-800 dark:bg-teal-950/40 dark:text-teal-400 font-black text-[10px] rounded-xl border border-teal-100 dark:border-teal-900 cursor-pointer shrink-0 transition-all uppercase tracking-wider leading-none">Taklif qilish</button>
+            </div>
+            <p id="room-tip-message" class="text-[10px] font-bold text-slate-500 dark:text-slate-400 mt-2 ml-0.5 leading-relaxed"></p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4.5">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Email (Shaxsiy kirish logini)</label>
+            <input type="email" name="email" placeholder="example@clinica.uz" required class="input-premium" autocomplete="new-password">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Xavfsiz Kirish Parol</label>
+            <input type="text" name="password" required class="input-premium" autocomplete="new-password">
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <div class="flex justify-between items-center px-0.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-330">Tarjimai hol / Ish tajribasi va shifokor bio</label>
+            <button id="ai-generate-bio-btn" type="button" class="text-teal-650 dark:text-teal-400 hover:text-teal-700 font-black text-[10px] uppercase tracking-wider flex items-center gap-1 cursor-pointer transition-colors" title="AI yordamida bio yozish">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="animate-pulse"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/></svg>
+              AI BILAN SHAKLLANTIRISH
+            </button>
+          </div>
+          <textarea name="bio" id="bio-textarea" class="input-premium !h-32 resize-none" placeholder="Ushbu xodimning tibbiy yoki professional tajribalari haqida ma'lumotlar..."></textarea>
+          <div id="ai-status" class="hidden text-[10px] font-black text-teal-600 dark:text-teal-400 uppercase tracking-widest ml-1 mt-1 animate-pulse">AI taklif yaratmoqda...</div>
+        </div>
+
+        <div class="space-y-2" id="resume-upload-section">
+          <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Rezyume / Rezyumelar ma'lumotnomasini yuklash (.pdf yoki .txt)</label>
+          <div class="relative group">
+            <input type="file" id="resume-file" accept=".pdf,.txt" class="hidden font-sans">
+            <label for="resume-file" class="flex items-center justify-between gap-4 w-full px-5 py-4 bg-slate-50 dark:bg-slate-900/40 border-2 border-dashed border-slate-205 dark:border-slate-800 rounded-2xl cursor-pointer hover:border-teal-500 hover:bg-white dark:hover:bg-slate-900 transition-all">
+              <span id="file-name-label" class="truncate text-xs font-bold text-slate-500">Kompyuterdan faylni bosing yoki bu yerga sudrab torting</span>
+              <svg xmlns="http://www.w3.org/2050/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600 shrink-0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+            </label>
+          </div>
+          <div id="extraction-status" class="hidden text-[10px] font-black text-teal-600 uppercase tracking-widest ml-1 animate-pulse">Rezyume tahlil qilinmoqda...</div>
+          <input type="hidden" name="resume_text" id="resume-text-input">
+        </div>
+        
+        <div class="flex gap-4 pt-4 shrink-0">
+          <button type="button" id="cancel-modal" class="btn-secondary !flex-1">BEKOR QILISH</button>
+          <button type="submit" id="submit-btn" class="btn-primary !flex-1">SAQLASH</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

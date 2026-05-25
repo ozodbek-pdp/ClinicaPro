@@ -1,0 +1,51 @@
+<div id="diagnose-view-modal-backdrop" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-[fadeIn_0.3s_ease-out] cursor-pointer">
+  <div class="bg-white dark:bg-[#121826] rounded-3xl shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden animate-[zoomIn_0.3s_ease-out] border border-slate-200/60 dark:border-slate-800 cursor-default">
+    <div class="px-8 py-6 flex justify-between items-center bg-teal-600 text-white relative shrink-0">
+       <div class="absolute inset-0 bg-gradient-to-r from-teal-700 to-teal-600 opacity-40"></div>
+       <div class="relative z-10">
+         <h2 class="text-xl font-extrabold tracking-tight uppercase">TIBBIY TASHXIS KARTASI</h2>
+         <p class="text-[10px] font-black uppercase tracking-wider opacity-90 mt-1 font-mono">Rasmiy hisobot varaqalari</p>
+       </div>
+       <button id="close-view" class="relative z-10 w-9 h-9 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-xl transition-all font-light cursor-pointer text-xl">&times;</button>
+    </div>
+    
+    <div class="p-8 space-y-8 overflow-y-auto flex-1 custom-scrollbar">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 border-b border-slate-100 dark:border-slate-800 pb-6">
+          <div class="space-y-1.5">
+            <span class="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Qabul qiluvchi Bemor</span>
+            <span class="font-extrabold text-[#111827] dark:text-white text-lg tracking-tight block" id="view-patient-fullname">-</span>
+          </div>
+          <div class="space-y-1.5 sm:text-right">
+            <span class="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Maslahatchi Shifokor</span>
+            <span class="font-extrabold text-teal-605 dark:text-teal-400 text-lg block font-mono" id="view-doctor-fullname">-</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+           <div class="space-y-1.5">
+            <span class="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Kiritilgan Sana</span>
+            <span class="font-bold text-slate-800 dark:text-slate-200 font-mono text-xs block" id="view-created-at">-</span>
+          </div>
+           <div class="space-y-1.5">
+            <span class="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Boshlanish kuni (Sana)</span>
+            <span class="font-bold text-slate-800 dark:text-slate-200 font-mono text-xs block" id="view-treatment-start">-</span>
+          </div>
+        </div>
+        
+        <div class="space-y-3">
+          <span class="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Tayinlangan muolajalar va xulosa varaqasi</span>
+          <div class="bg-slate-50/50 dark:bg-slate-900/30 p-6 rounded-2xl border border-slate-200/50 dark:border-slate-800">
+            <p class="text-slate-750 dark:text-slate-300 font-semibold leading-relaxed whitespace-pre-wrap italic text-sm" id="view-description">"-"</p>
+          </div>
+        </div>
+    </div>
+
+    <div class="p-6 border-t border-slate-200/50 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 flex flex-col sm:flex-row gap-3 shrink-0">
+       <button id="pdf-download-btn" class="btn-primary flex-1 !py-3.5 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          HISOBOТNI PDF YUKLASH
+       </button>
+       <button id="close-view-btn" class="btn-secondary !px-8 !py-3.5 cursor-pointer">MULOQOTNI YOPISH</button>
+    </div>
+  </div>
+</div>

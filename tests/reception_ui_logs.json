@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-05-23T15:08:30.000Z",
+  "summary": {
+    "admin_integration_tests": "passed",
+    "reception_ui_test": {
+      "created_room_via_ui": true,
+      "deleted_room_via_ui": true,
+      "note": "Console and network logs captured during the UI run (session resources)."
+    }
+  },
+  "commands_run": [
+    "node tests/run-tests.mjs",
+    "curl -X POST /api/users (create reception if missing)",
+    "curl -X POST /api/auth/login (reception)",
+    "UI: add room -> delete room (via browser)"
+  ]
+}

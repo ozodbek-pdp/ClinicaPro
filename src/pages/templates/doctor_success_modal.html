@@ -1,0 +1,48 @@
+<div class="fixed inset-0 bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-4 z-[60] animate-[fadeIn_0.3s_ease-out]">
+   <div class="bg-white dark:bg-[#121826] rounded-3xl shadow-xl max-w-md w-full flex flex-col overflow-hidden animate-[zoomIn_0.3s_ease-out] border border-slate-200/60 dark:border-slate-800">
+      <div class="px-8 py-5 flex justify-between items-center bg-teal-600 text-white shrink-0 relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-teal-700 to-teal-600 opacity-40"></div>
+        <div class="relative z-10">
+          <h2 class="text-lg font-extrabold tracking-tight">Xodim muvaffaqiyatli saqlandi</h2>
+        </div>
+        <button id="close-success-view" class="text-white/60 hover:text-white text-xl cursor-pointer">&times;</button>
+      </div>
+      
+      <div class="p-8 space-y-6 text-center">
+            <div class="w-16 h-16 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 rounded-2xl flex items-center justify-center mx-auto shadow-inner border border-emerald-100/30 dark:border-emerald-999/10">
+               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="space-y-1.5">
+               <h3 class="text-sm font-extrabold text-slate-800 dark:text-white uppercase tracking-wider font-mono">XODIM RO'YXATGA OLINDI</h3>
+               <p class="text-xs font-semibold text-slate-400 dark:text-slate-500 leading-relaxed font-sans">Xizmatchi profili muvaffaqiyatli yuklandi. Tizimga kirish kalitlarini topshiring:</p>
+            </div>
+            <div class="bg-slate-50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800 text-left space-y-3">
+                <div>
+                   <p class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Rol Statusi</p>
+                   <p class="font-bold text-slate-800 dark:text-slate-200 text-sm" id="success-role-text"></p>
+                </div>
+                <div>
+                   <p class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Login / Email</p>
+                   <p class="font-extrabold text-teal-605 dark:text-teal-400 text-sm select-all" id="success-email"></p>
+                </div>
+                <div>
+                   <p class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Kirish Kaliti (Parol)</p>
+                   <p class="font-extrabold text-slate-800 dark:text-slate-100 text-sm select-all" id="success-password"></p>
+                </div>
+                <div id="success-room-container" class="hidden">
+                   <p class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Biriktirilgan Xona</p>
+                   <p class="font-extrabold text-teal-600 dark:text-teal-400 text-sm" id="success-room-text"></p>
+                </div>
+            </div>
+         </div>
+         
+         <div class="p-6 border-t border-slate-200/50 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30 flex flex-col gap-2 shrink-0">
+           <button id="download-pass-pdf" class="btn-secondary w-full cursor-pointer flex items-center justify-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              PDF QAYTA YUKLASH
+           </button>
+           <button id="close-success-btn" class="btn-primary w-full cursor-pointer">RO'YXATGA QAYTISH</button>
+         </div>
+      </div>
+   </div>
+</div>

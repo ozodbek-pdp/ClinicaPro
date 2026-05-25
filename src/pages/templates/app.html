@@ -1,0 +1,66 @@
+<div class="flex h-screen bg-slate-50 dark:bg-[#070a11] text-slate-800 dark:text-slate-100 font-sans overflow-hidden">
+  <!-- Sidebar -->
+  <aside class="w-72 bg-white dark:bg-[#0f1524] border-r border-teal-500/15 shadow-[6px_0_24px_rgba(13,148,136,0.03)] flex flex-col relative z-20 transition-all duration-300 hidden md:flex" id="sidebar">
+    <!-- Logo Header -->
+    <div class="px-6 py-6 border-b border-teal-500/15 flex justify-between items-center bg-white/50 dark:bg-[#0f1524]/50 backdrop-blur-xl shrink-0">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-teal-500 to-teal-600 dark:from-teal-600 dark:to-teal-700 rounded-xl flex items-center justify-center text-white shadow-md shadow-teal-500/10 dark:shadow-none shrink-0 transition-transform hover:rotate-12 duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-white"><path d="M19 14.5v-9l-7-3-7 3v9c0 5.5 7 8.5 7 8.5s7-3 7-8.5Z"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+        </div>
+        <div>
+          <h1 class="text-lg font-extrabold tracking-tight text-slate-900 dark:text-white leading-none">Clinica<span class="text-teal-600 dark:text-teal-400">Pro</span></h1>
+          <span class="text-[9px] text-teal-650 dark:text-teal-400 font-black uppercase tracking-widest mt-1 block leading-none font-mono">Tibbiyot Portali</span>
+        </div>
+      </div>
+      <button id="close-sidebar" class="md:hidden p-1.5 text-slate-400 hover:text-slate-650 rounded-lg cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    
+    <!-- Navigation Link Container -->
+    <div class="p-4 flex-1 overflow-y-auto custom-scrollbar">
+      <nav class="space-y-1.5" id="nav-links">
+        <!-- Nav links will be injected here -->
+      </nav>
+    </div>
+
+    <!-- Sidebar Profile and Footer Controls -->
+    <div class="p-5 border-t border-teal-500/15 bg-slate-50/80 dark:bg-[#0f1524]/40 shrink-0">
+      <div class="flex items-center gap-3 mb-5 px-1 pb-1">
+        <div id="user-avatar-text" class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 dark:from-teal-600 dark:to-teal-700 text-white flex items-center justify-center font-bold text-base shadow-sm shadow-teal-600/10 shrink-0">
+          U
+        </div>
+        <div class="flex-1 min-w-0">
+          <p id="user-role-text" class="text-[9px] font-black text-teal-600 dark:text-teal-400 uppercase tracking-widest leading-none mb-1.5">
+            MUKHLIS TIBBIYOTCHI
+          </p>
+          <p id="user-fullname-text" class="text-sm font-bold text-slate-800 dark:text-slate-100 truncate leading-none">Foydalanuvchi</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-2 w-full mt-2">
+        <button id="logout-btn" class="w-full h-11 flex items-center justify-center gap-2 px-4 text-xs font-bold uppercase tracking-wider text-rose-600 bg-rose-50 hover:bg-rose-100/80 hover:text-rose-700 transition-all border border-rose-100/50 rounded-xl cursor-pointer" title="Sistemadan Chiqish">
+           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+           Sistemadan Chiqish
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main content panel -->
+  <main class="flex-1 flex flex-col h-screen overflow-hidden relative bg-slate-50 dark:bg-[#070a11]">
+    <header class="bg-white dark:bg-[#0f1524] border-b border-teal-500/15 p-4 md:hidden flex justify-between items-center shadow-xs shrink-0">
+      <h1 class="text-xl font-extrabold text-teal-600 dark:text-teal-400 tracking-tight">Clinica<span class="text-slate-800 dark:text-slate-100">Pro</span></h1>
+      <button id="mobile-menu-btn" class="p-2 text-slate-600 dark:text-slate-350 hover:bg-slate-101 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer">
+        <svg xmlns="http://www.w3.org/2005/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </button>
+    </header>
+
+    <!-- Sidebar overlay for mobiles -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-20 hidden md:hidden transition-opacity pointer-events-none"></div>
+
+    <div class="p-5 md:p-8 flex-1 overflow-y-auto min-h-0 custom-scrollbar relative" id="page-content">
+      <!-- Page content gets injected -->
+    </div>
+  </main>
+</div>

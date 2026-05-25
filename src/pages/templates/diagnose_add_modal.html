@@ -1,0 +1,49 @@
+<div class="fixed inset-0 bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-[fadeIn_0.3s_ease-out]">
+  <div class="bg-white dark:bg-[#121826] rounded-3xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col scale-100 animate-[zoomIn_0.3s_ease-out] border border-slate-200/60 dark:border-slate-800">
+    <div class="px-8 py-6 border-b border-slate-200/50 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-900/30 shrink-0">
+      <div>
+        <h2 id="modal-title" class="text-2xl font-extrabold text-[#111827] dark:text-white tracking-tight">Yangi Tashxis Varaqasi</h2>
+        <p class="text-[10px] font-black text-teal-600 dark:text-teal-400 mt-1 uppercase tracking-wider font-mono">Tibbiy xulosa va retsepturani shakllantirish</p>
+      </div>
+      <button id="close-modal" class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-slate-650 dark:hover:text-slate-200 hover:bg-slate-101 dark:hover:bg-slate-800 rounded-xl transition-all text-xl cursor-pointer">&times;</button>
+    </div>
+    <div class="overflow-y-auto flex-1 custom-scrollbar">
+      <form id="diag-form" class="p-8 flex flex-col gap-5.5">
+        <!-- Error panel -->
+        <div id="form-error-container" class="bg-rose-50 dark:bg-rose-955/20 text-rose-600 dark:text-rose-400 p-4 rounded-xl text-xs font-bold border border-rose-100/50 dark:border-rose-900/20 flex items-center gap-2 hidden transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          <span id="form-error-text"></span>
+        </div>
+        
+        <div class="space-y-1.5 font-sans">
+          <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Qabul qiluvchi Bemor</label>
+          <select name="patientId" required id="select-patient" class="input-premium appearance-none cursor-pointer">
+            <option value="">Ro'yxatdan bemorni tanlang</option>
+          </select>
+        </div>
+
+        <div id="doctor-select-wrapper" class="space-y-1.5 font-sans hidden">
+          <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Maslahatchi Mas'ul Shifokor</label>
+          <select name="doctorId" id="select-doctor" class="input-premium appearance-none cursor-pointer">
+            <option value="">Shifokorni belgilang</option>
+          </select>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-bold text-slate-400 dark:text-slate-300 ml-0.5">Tashxis binosi xulosasi va retsepturasi</label>
+          <textarea name="description" required class="input-premium !h-40 resize-none" placeholder="Bemorning ko'rikdagi shikoyati, olingan tahlillar kardiogrammasi natijalari hamda tayinlangan dori-darmonlar miqdori haqida mukammal xulosani yozib qoldiring..."></textarea>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-bold text-slate-400 dark:text-slate-300 ml-0.5">Muolajani boshlash va keyingi ko'rik kuni</label>
+          <input type="date" name="treatmentStartDate" required class="input-premium">
+        </div>
+
+        <div class="flex gap-4 pt-4 shrink-0">
+          <button type="button" id="cancel-modal" class="btn-secondary !flex-1">BEKOR QILISH</button>
+          <button type="submit" id="submit-btn" class="btn-primary !flex-1">SAQLASH</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

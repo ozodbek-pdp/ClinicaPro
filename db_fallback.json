@@ -1,0 +1,164 @@
+{
+  "users": [
+    {
+      "id": "a1a1a1a1-1111-1111-1111-111111111111",
+      "first_name": "Asosiy",
+      "last_name": "Admin",
+      "email": "admin@klinika.uz",
+      "password": "123",
+      "role": "admin",
+      "specialty": null,
+      "created_at": "2026-05-23T10:36:39.692Z"
+    },
+    {
+      "id": "b2b2b2b2-2222-2222-2222-222222222222",
+      "first_name": "Zahro",
+      "last_name": "Qabulxona",
+      "email": "reception@klinika.uz",
+      "password": "123",
+      "role": "reception",
+      "specialty": null,
+      "created_at": "2026-05-23T10:36:39.692Z"
+    },
+    {
+      "id": "c3c3c3c3-3333-3333-3333-333333333333",
+      "first_name": "Ali",
+      "last_name": "Qodirov",
+      "email": "ali@klinika.uz",
+      "password": "123",
+      "role": "doctor",
+      "specialty": "Kardiolog",
+      "room_number": "101",
+      "created_at": "2026-05-23T10:36:39.692Z"
+    },
+    {
+      "id": "d4d4d4d4-4444-4444-4444-444444444444",
+      "first_name": "Madina",
+      "last_name": "Karimova",
+      "email": "madina@klinika.uz",
+      "password": "123",
+      "role": "doctor",
+      "specialty": "Nevropatolog",
+      "room_number": "102",
+      "created_at": "2026-05-23T10:36:39.692Z"
+    },
+    {
+      "id": "e5e5e5e5-5555-5555-5555-555555555555",
+      "first_name": "Toshmat",
+      "last_name": "Eshmatov",
+      "email": "toshmat@gmail.com",
+      "password": "123",
+      "role": "patient",
+      "specialty": null,
+      "created_at": "2026-05-23T10:36:39.692Z"
+    },
+    {
+      "id": "f6f6f6f6-6666-6666-6666-666666666666",
+      "first_name": "Gulnoza",
+      "last_name": "Rahmatova",
+      "email": "gulnoza@gmail.com",
+      "password": "123",
+      "role": "patient",
+      "specialty": null,
+      "created_at": "2026-05-23T10:36:39.692Z"
+    },
+    {
+      "id": "3c634a8b-1bc9-494c-9058-a577908cc740",
+      "first_name": "Ozodbek",
+      "last_name": "Ahmedov",
+      "email": null,
+      "password": "123456",
+      "role": "patient",
+      "phone": "+998976667466",
+      "birth_date": "2026-05-15",
+      "address": "Toshkent",
+      "bio": "",
+      "status": "active",
+      "created_at": "2026-05-23T10:36:39.692Z"
+    },
+    {
+      "id": "3c634a8b-1bc9-494c-9058-a577908cc740",
+      "first_name": "Ozodbek",
+      "last_name": "Ahmedov",
+      "email": null,
+      "password": "123456",
+      "role": "patient",
+      "phone": "+998976667466",
+      "birth_date": "2026-05-15",
+      "address": "Toshkent",
+      "bio": "",
+      "status": "active",
+      "created_at": "2026-05-23T09:18:17.840Z"
+    },
+    {
+      "id": "c3bb8ae9-9824-4866-bef2-11af0c09dbe8",
+      "first_name": "Ozodbek",
+      "last_name": "ahmedov",
+      "email": "hfsh@xgf",
+      "password": "654321",
+      "role": "doctor",
+      "specialty": "nerv",
+      "phone": "+998976667466",
+      "birth_date": "2026-05-07",
+      "address": "tasheknt",
+      "bio": "CLINICA PRO PORTAL  KIRISH MA'LUMOTLARI PROTOKOLI  Ism Familiya: ahmedov Ozodbek Login: ozodbekahmedov12007@gmail.com  Kirish paroli: 654321  Ushbu maxfiy ma'lumotlarni ehtiyotkorlik bilan saqlang.",
+      "resume_text": "CLINICA PRO PORTAL  KIRISH MA'LUMOTLARI PROTOKOLI  Ism Familiya: ahmedov Ozodbek Login: ozodbekahmedov12007@gmail.com  Kirish paroli: 654321  Ushbu maxfiy ma'lumotlarni ehtiyotkorlik bilan saqlang.\n",
+      "status": "active",
+      "icd_code": null,
+      "room_number": "124",
+      "created_at": "2026-05-23T09:23:31.425Z"
+    }
+  ],
+  "diagnoses": [
+    {
+      "id": "a0a0a0a0-bbbb-cccc-dddd-111122223333",
+      "patient_id": "e5e5e5e5-5555-5555-5555-555555555555",
+      "doctor_id": "c3c3c3c3-3333-3333-3333-333333333333",
+      "description": "Yurak ritmining buzilishi. EKG natijalari qoniqarsiz.",
+      "treatment_start_date": "2026-05-23T10:36:39.692Z",
+      "created_at": "2026-05-23T10:36:39.692Z",
+      "updated_at": "2026-05-23T10:36:39.692Z"
+    },
+    {
+      "id": "b0b0b0b0-bbbb-cccc-dddd-111122223333",
+      "patient_id": "f6f6f6f6-6666-6666-6666-666666666666",
+      "doctor_id": "d4d4d4d4-4444-4444-4444-444444444444",
+      "description": "Bosh og'rig'i va holsizlik. Nevrologik ko'rik tayinlandi.",
+      "treatment_start_date": "2026-05-23T10:36:39.692Z",
+      "created_at": "2026-05-23T10:36:39.692Z",
+      "updated_at": "2026-05-23T10:36:39.692Z"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "r1",
+      "room_number": "101",
+      "specialty": "Kardiolog"
+    },
+    {
+      "id": "r2",
+      "room_number": "102",
+      "specialty": "Nevropatolog"
+    },
+    {
+      "id": "r3",
+      "room_number": "123",
+      "specialty": "Tish shifokori"
+    },
+    {
+      "id": "r4",
+      "room_number": "124",
+      "specialty": "Tish shifokori"
+    },
+    {
+      "id": "r5",
+      "room_number": "201",
+      "specialty": "Oftalmolog"
+    },
+    {
+      "id": "r6",
+      "room_number": "202",
+      "specialty": "Pediatr"
+    }
+  ]
+}

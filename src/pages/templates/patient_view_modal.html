@@ -1,0 +1,65 @@
+<div id="patient-view-modal-backdrop" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-[fadeIn_0.3s_ease-out] cursor-pointer">
+   <div class="bg-white dark:bg-[#121826] rounded-3xl shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden animate-[zoomIn_0.3s_ease-out] border border-slate-200/60 dark:border-slate-800 cursor-default">
+     <div class="px-8 py-6 flex justify-between items-center bg-teal-600 text-white relative shrink-0">
+        <div class="absolute inset-0 bg-gradient-to-r from-teal-700 to-teal-600 opacity-40"></div>
+        <div class="relative z-10">
+          <h2 class="text-2xl font-extrabold tracking-tight" id="view-fullname">Bemor Ismi</h2>
+          <p class="text-[10px] font-black uppercase tracking-wider opacity-90 mt-1 font-mono">Ambulator Hujjatlar & Tibbiy Karta</p>
+        </div>
+        <button id="close-view" class="relative z-10 w-9 h-9 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-xl transition-all font-light cursor-pointer text-xl">&times;</button>
+     </div>
+     
+     <div class="p-8 space-y-8 overflow-y-auto flex-1 custom-scrollbar">
+         <div class="flex flex-col sm:flex-row items-center gap-6">
+             <div id="view-avatar-circle" class="w-20 h-20 bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-950/40 dark:to-teal-900/10 text-teal-750 dark:text-teal-400 rounded-3xl flex items-center justify-center font-bold text-3xl shadow-inner border border-teal-100/50 dark:border-teal-950/20 shrink-0">
+                U
+             </div>
+             <div class="text-center sm:text-left">
+                <span class="inline-flex px-3 py-1 bg-teal-50 dark:bg-teal-950/30 text-teal-800 dark:text-teal-400 rounded-lg text-xs font-bold mb-2.5" id="view-status-badge">Status</span>
+                <h3 class="text-2xl font-extrabold text-[#111827] dark:text-white tracking-tight leading-none" id="view-title-fullname">Ism Familiya</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 font-semibold mt-2" id="view-birthdate">Tug'ilgan sana kiritilmagan</p>
+             </div>
+         </div>
+
+         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 border-y border-slate-100 dark:border-slate-800/80 py-6">
+            <div class="space-y-1">
+              <span class="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Pochta Manzili</span>
+              <span class="font-bold text-slate-800 dark:text-slate-100 break-all text-sm" id="view-email">-</span>
+            </div>
+            <div class="space-y-1">
+              <span class="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Telefon Nomeri</span>
+              <span class="font-bold text-slate-800 dark:text-slate-100 text-sm" id="view-phone">-</span>
+            </div>
+            <div class="space-y-1">
+              <span class="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Yashash Joy Manzil</span>
+              <span class="font-bold text-slate-800 dark:text-slate-100 text-sm" id="view-address">-</span>
+            </div>
+            <div class="space-y-1">
+              <span class="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Ro'yxatgaga Olingan Kun</span>
+              <span class="font-bold text-slate-800 dark:text-slate-100 text-sm" id="view-created-at">-</span>
+            </div>
+            <div class="space-y-1 sm:col-span-2 bg-gradient-to-r from-teal-500/5 to-emerald-500/5 dark:from-teal-500/10 dark:to-emerald-500/10 p-4.5 rounded-2xl border border-teal-500/10 flex items-center justify-between">
+              <div>
+                <span class="block text-[10px] font-bold text-teal-605 dark:text-teal-400 uppercase tracking-widest font-mono mb-1 leading-none">Kasallik Kodi (ICD-10-CM)</span>
+                <span class="font-mono text-[15px] font-black text-slate-800 dark:text-slate-200 tracking-wider inline-flex items-center gap-1.5" id="view-icd-code">-</span>
+              </div>
+              <span class="text-[9px] font-black tracking-widest uppercase text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-950/40 border border-teal-500/20 px-2.5 py-1.5 rounded-lg font-mono">ICD-10 FAOL</span>
+            </div>
+         </div>
+
+         <div class="space-y-3">
+            <span class="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Anamnez / Boshlang'ich shikoyatlar va izohlar</span>
+            <div class="bg-slate-50/50 dark:bg-slate-900/30 p-5 rounded-2xl border border-slate-205 dark:border-slate-800/80">
+              <p class="text-slate-600 dark:text-slate-350 font-semibold leading-relaxed italic" id="view-bio">"Hozircha hech qanday qo'shimcha izoh yoki biografiya qayd etilmadi."</p>
+            </div>
+         </div>
+     </div>
+     
+     <div class="p-6 border-t border-slate-200/60 dark:border-slate-800/80 bg-slate-50/50 dark:bg-slate-900/30 flex flex-col sm:flex-row gap-3 shrink-0">
+        <button id="finish-treatment" class="btn-primary !bg-emerald-600 hover:!bg-emerald-700 !shadow-emerald-500/10 flex-1 !py-3.5 cursor-pointer hidden">DAVOLASHNI YAKUNLASH</button>
+        <button id="reopen-treatment" class="btn-ghost !bg-amber-50 text-amber-600 border border-amber-100 flex-1 !py-3.5 cursor-pointer hidden">DAVOLASHNI OCHISH</button>
+        <button id="download-user-pdf" class="btn-primary flex-1 !py-3.5 cursor-pointer hidden">AMBULATOR KARTA YUKLASH (PDF)</button>
+        <button id="close-view-btn" class="btn-secondary flex-1 !py-3.5 cursor-pointer">YOPISH</button>
+      </div>
+   </div>
+</div>

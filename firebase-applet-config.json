@@ -1,0 +1,10 @@
+{
+  "projectId": "globalnews-login",
+  "appId": "1:508424435922:web:562c38795051b2b389550b",
+  "apiKey": "AIzaSyCnxWMzbOql47PhroOGrpI7CejtYdY6Kr8",
+  "authDomain": "globalnews-login.firebaseapp.com",
+  "firestoreDatabaseId": "ai-studio-420afd88-bf50-4268-8b2f-3fb0abc079ca",
+  "storageBucket": "globalnews-login.firebasestorage.app",
+  "messagingSenderId": "508424435922",
+  "measurementId": ""
+}

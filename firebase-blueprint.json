@@ -1,0 +1,46 @@
+{
+  "entities": {
+    "user": {
+      "title": "User",
+      "description": "User account information",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "first_name": { "type": "string" },
+        "last_name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "reception", "doctor", "patient"] },
+        "specialty": { "type": "string" },
+        "status": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "first_name", "role", "created_at"]
+    },
+    "diagnosis": {
+      "title": "Diagnosis",
+      "description": "Medical diagnosis for a patient",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "patient_id": { "type": "string" },
+        "doctor_id": { "type": "string" },
+        "description": { "type": "string" },
+        "treatment_start_date": { "type": "string", "format": "date" },
+        "created_at": { "type": "string" },
+        "updated_at": { "type": "string" }
+      },
+      "required": ["id", "patient_id", "description"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": { "$ref": "user" },
+      "description": "User profiles"
+    },
+    "diagnoses/{diagnosisId}": {
+      "schema": { "$ref": "diagnosis" },
+      "description": "Medical diagnoses"
+    }
+  }
+}

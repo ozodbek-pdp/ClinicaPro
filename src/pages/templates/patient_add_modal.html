@@ -1,0 +1,88 @@
+<div class="fixed inset-0 bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-[fadeIn_0.3s_ease-out]">
+  <div class="bg-white dark:bg-[#121826] rounded-3xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col scale-100 animate-[zoomIn_0.3s_ease-out] border border-slate-200/60 dark:border-slate-800">
+    <div class="px-8 py-6 border-b border-slate-200/50 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-900/30 shrink-0">
+      <div>
+        <h2 class="text-2xl font-extrabold text-[#111827] dark:text-white tracking-tight">Yangi Bemor Anketa Ochish</h2>
+        <p class="text-[10px] font-black text-teal-600 dark:text-teal-400 mt-1 uppercase tracking-wider font-mono">Tizimga yangi bemor profili kiritish</p>
+      </div>
+      <button id="close-modal" class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-slate-650 dark:hover:text-slate-200 hover:bg-slate-101 dark:hover:bg-slate-800 rounded-xl transition-all text-xl cursor-pointer">&times;</button>
+    </div>
+    <div class="overflow-y-auto flex-1 custom-scrollbar">
+      <form id="patient-form" class="p-8 flex flex-col gap-5.5" autocomplete="off">
+        <!-- Prevent autofill of search fields -->
+        <input type="text" name="prevent_autofill_username" style="display:none;" />
+        <input type="password" name="prevent_autofill_password" style="display:none;" />
+        
+        <!-- Error Panel -->
+        <div id="form-error-container" class="bg-rose-50 dark:bg-rose-955/20 text-rose-600 dark:text-rose-400 p-4 rounded-xl text-xs font-bold border border-rose-100/50 dark:border-rose-900/20 flex items-center gap-2 hidden transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          <span id="form-error-text"></span>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4.5">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Ism</label>
+            <input type="text" name="firstName" required placeholder="Masalan, Ozodbek" class="input-premium">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Familiya</label>
+            <input type="text" name="lastName" required placeholder="Masalan, Ahmedov" class="input-premium">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4.5">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Telefon raqam (Birinchi Login)</label>
+            <input type="text" name="phone" required class="input-premium" placeholder="+998 90 123 45 67">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Tug'ilgan sana</label>
+            <input type="date" name="birth_date" class="input-premium">
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Yashash manzili (Doimiy turar joy)</label>
+          <input type="text" name="address" class="input-premium" placeholder="Shahar, tuman, ko'cha, xonadon binosi...">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4.5">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Xalqaro Kasalliklar Kodi (ICD-10)</label>
+            <input type="text" name="icd_code" placeholder="Masalan: I10, J06, E11" class="input-premium">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Boshlang'ich Parol</label>
+            <input type="text" name="password" required class="input-premium" autocomplete="new-password">
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Izohlar / Kasallik tarixi & Biografiya</label>
+          <textarea name="bio" class="input-premium !h-28 resize-none" placeholder="Allergiyalar, surunkali kasalliklar, yoki birinchi marta qabul murojaati haqida izohlar..."></textarea>
+        </div>
+
+        <!-- Admin/Reception: assign doctor and room -->
+        <div id="assign-doctor-room" class="grid grid-cols-1 md:grid-cols-2 gap-4.5 hidden">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Mas'ul shifokor (ixtiyoriy)</label>
+            <select id="doctor-select" name="doctorId" class="input-premium">
+              <option value="">-- Shifokorni tanlang --</option>
+            </select>
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-300 ml-0.5">Biriktirilgan xona (ixtiyoriy)</label>
+            <select id="room-select" name="room_number" class="input-premium">
+              <option value="">-- Xonani tanlang --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex gap-4 pt-4 shrink-0">
+          <button type="button" id="cancel-modal" class="btn-secondary !flex-1">BEKOR QILISH</button>
+          <button type="submit" id="submit-btn" class="btn-primary !flex-1">KARTANI OCHISH</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
