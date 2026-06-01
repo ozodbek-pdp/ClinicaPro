@@ -1,4 +1,4 @@
-name: CI and Deploy to Netlify
+name: CI
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-test-deploy:
+  build-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,8 +38,6 @@ jobs:
 
       - name: Run integration tests
         run: node tests/run-tests.mjs
-
-      # Netlify deploy removed per request — CI now only builds and runs tests.
 
       - name: Stop server
         if: always()
