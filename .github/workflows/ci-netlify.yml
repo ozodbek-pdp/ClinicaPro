@@ -39,17 +39,7 @@ jobs:
       - name: Run integration tests
         run: node tests/run-tests.mjs
 
-      - name: Deploy to Netlify
-        if: github.ref == 'refs/heads/main' && success()
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: |
-          if [ -z "$NETLIFY_AUTH_TOKEN" ] || [ -z "$NETLIFY_SITE_ID" ]; then
-            echo "NETLIFY_AUTH_TOKEN or NETLIFY_SITE_ID not set — skipping deploy";
-            exit 0;
-          fi
-          npx netlify-cli deploy --dir=dist --prod --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN
+      # Netlify deploy removed per request — CI now only builds and runs tests.
 
       - name: Stop server
         if: always()
