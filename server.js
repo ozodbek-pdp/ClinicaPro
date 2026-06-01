@@ -14,8 +14,17 @@ const { Pool } = pkg;
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+let __filename = null;
+let __dirname = null;
+try {
+  __filename = fileURLToPath(import.meta.url);
+  __dirname = path.dirname(__filename);
+} catch (e) {
+  // When bundled to CommonJS `import.meta` may be undefined. Fall back to
+  // `process.argv[1]` (the executed script path) or `process.cwd()`.
+  __filename = (process && process.argv && process.argv[1]) ? process.argv[1] : null;
+  __dirname = __filename ? path.dirname(__filename) : process.cwd();
+}
 
 // Read app metadata (clinic contact info)
 const metadataPath = path.join(process.cwd(), 'metadata.json');

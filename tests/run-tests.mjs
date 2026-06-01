@@ -32,7 +32,7 @@ async function main() {
   assert(Array.isArray(users.json), 'GET /api/users failed');
 
   // Create test patient
-  const patientPayload = { first_name: 'E2E', last_name: 'Patient', email: `e2e.patient.${Date.now()}@local`, password: 'p123', role: 'patient', phone: '+998900000000' };
+  const patientPayload = { first_name: 'E2E', last_name: 'Patient', email: `e2e.patient.${Date.now()}@local`, password: 'p123', role: 'patient', phone: `+9989${String(Date.now()).slice(-9)}` };
   const createPatient = await req('/api/users', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(patientPayload) });
   log('CREATE PATIENT:', createPatient.res.status, createPatient.json && createPatient.json.id);
   assert(createPatient.res.ok && createPatient.json && createPatient.json.id, 'Create patient failed');
@@ -47,14 +47,14 @@ async function main() {
 
   // Create test doctor assigned to the room
   const doctorPayload = { first_name: 'E2E', last_name: 'Doctor', email: `e2e.doctor.${Date.now()}@local`, password: 'd123', role: 'doctor', specialty: 'TestSpec', room_number: roomPayload.room_number };
-  const createDoctor = await req('/api/users', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(doctorPayload) });
+  const createDoctor = await req('/api/users', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-user-role': 'admin', 'x-user-id': admin.id }, body: JSON.stringify(doctorPayload) });
   log('CREATE DOCTOR:', createDoctor.res.status, createDoctor.json && createDoctor.json.id);
   assert(createDoctor.res.ok && createDoctor.json && createDoctor.json.id, 'Create doctor failed');
   const doctorId = createDoctor.json.id;
 
   // Create diagnosis linking patient and doctor
   const diagPayload = { patient_id: patientId, doctor_id: doctorId, description: 'E2E test diagnosis', treatment_start_date: new Date().toISOString().split('T')[0] };
-  const createDiag = await req('/api/diagnoses', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(diagPayload) });
+  const createDiag = await req('/api/diagnoses', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-user-role': 'doctor', 'x-user-id': doctorId }, body: JSON.stringify(diagPayload) });
   log('CREATE DIAG:', createDiag.res.status, createDiag.json && createDiag.json.id);
   assert(createDiag.res.ok && createDiag.json && createDiag.json.id, 'Create diagnosis failed');
   const diagId = createDiag.json.id;
@@ -72,13 +72,13 @@ async function main() {
   }
 
   // Cleanup: delete diag, doctor, patient, room
-  const delDiag = await req('/api/diagnoses/' + diagId, { method: 'DELETE' });
+  const delDiag = await req('/api/diagnoses/' + diagId, { method: 'DELETE', headers: { 'x-user-role': 'admin', 'x-user-id': admin.id } });
   log('DEL DIAG:', delDiag.res.status);
-  const delDoctor = await req('/api/users/' + doctorId, { method: 'DELETE' });
+  const delDoctor = await req('/api/users/' + doctorId, { method: 'DELETE', headers: { 'x-user-role': 'admin', 'x-user-id': admin.id } });
   log('DEL DOCTOR:', delDoctor.res.status);
-  const delPatient = await req('/api/users/' + patientId, { method: 'DELETE' });
+  const delPatient = await req('/api/users/' + patientId, { method: 'DELETE', headers: { 'x-user-role': 'admin', 'x-user-id': admin.id } });
   log('DEL PATIENT:', delPatient.res.status);
-  const delRoom = await req('/api/rooms/' + roomId, { method: 'DELETE' });
+  const delRoom = await req('/api/rooms/' + roomId, { method: 'DELETE', headers: { 'x-user-role': 'admin', 'x-user-id': admin.id } });
   log('DEL ROOM:', delRoom.res.status, delRoom.json || delRoom.text);
 
   // Final sanity
