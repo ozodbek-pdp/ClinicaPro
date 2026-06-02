@@ -39,7 +39,7 @@ try {
 }
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
 app.use(compression());
 app.use(express.json({ limit: '20mb' }));

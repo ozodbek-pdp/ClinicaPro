@@ -3,8 +3,8 @@ import { setupAuth } from "./auth";
 import { API_BASE } from "./lib/api";
 
 async function bootstrap() {
-  // Initialize client-side mock API before any page code can fire requests.
-  if (!API_BASE) {
+  // Only use the client-side mock API in development when no real API base is configured.
+  if (import.meta.env.DEV && !API_BASE) {
     try {
       const mod = await import("./lib/mockApi");
       await mod.initMockApi();
